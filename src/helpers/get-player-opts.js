@@ -33,9 +33,9 @@ function getPlayerOpts(opts) {
     let playerSegsPerm = '';
     try {
       if (typeof window !== 'undefined'){
-        const segs = JSON.parse(localStorage.getItem('_pdfps'));
+        const segs = JSON.parse(localStorage.getItem('_pdfps') || '[]') || [];
         if (Array.isArray(segs)) {
-          playerSegsPerm = segs.join(',');
+          playerSegsPerm = segs.slice(0,250).join(',');
         }
       }
     } catch (e) {
