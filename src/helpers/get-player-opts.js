@@ -30,10 +30,18 @@ function getPlayerOpts(opts) {
   }
 
   if (hasAdvertising) {
+    const permutiveSegments = (window.permutive && Array.isArray(window.permutive.segments))
+      ? window.permutive.segments
+      : [];
+
     playerOpts.advertising = {
       client: 'googima',
       admessage: 'Ad — xxs left',
       autoplayadsmuted: true,
+      // Se agregan como key-values para targeting
+      targeting: {
+        permutive: permutiveSegments.join(','),
+      },
     };
   }
 
