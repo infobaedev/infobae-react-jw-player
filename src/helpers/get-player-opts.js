@@ -32,13 +32,14 @@ function getPlayerOpts(opts) {
   if (hasAdvertising) {
     let playerSegsPerm = '';
     try {
-      if (typeof window !== 'undefined'){
+      if (typeof window !== 'undefined') {
         const segs = JSON.parse(localStorage.getItem('_pdfps') || '[]') || [];
         if (Array.isArray(segs)) {
-          playerSegsPerm = segs.slice(0,250).join(',');
+          playerSegsPerm = segs.slice(0, 250).join(',');
         }
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.warn('No se pudieron leer los segmentos de Permutive:', e);
     }
 
