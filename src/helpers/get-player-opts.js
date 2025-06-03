@@ -30,10 +30,27 @@ function getPlayerOpts(opts) {
   }
 
   if (hasAdvertising) {
+    let playerSegsPerm = '';
+    try {
+      if (typeof window !== 'undefined'){
+        const segs = JSON.parse(localStorage.getItem('_pdfps') || '[]') || [];
+        if (Array.isArray(segs)) {
+          playerSegsPerm = segs.slice(0,250).join(',');
+        }
+      }
+    } catch (e) {
+      console.warn('No se pudieron leer los segmentos de Permutive:', e);
+    }
+
+    const hasQuery = generatePrerollUrl.includes('?');
+    const encodedCustParams = `cust_params=permutive%3D${encodeURIComponent(playerSegsPerm)}`;
+    const finalTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedCustParams;
+
     playerOpts.advertising = {
       client: 'googima',
       admessage: 'Ad — xxs left',
       autoplayadsmuted: true,
+      tag: finalTagUrl,
     };
   }
 
