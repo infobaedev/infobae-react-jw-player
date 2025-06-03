@@ -43,7 +43,7 @@ function getPlayerOpts(opts) {
     }
 
     const hasQuery = generatePrerollUrl.includes('?');
-    const encodedCustParams = `cust_params=permutive%3D${encodeURIComponent(playerSegsPerm)}`;
+    const encodedCustParams = `permutive=${encodeURIComponent(playerSegsPerm)}`;
     const finalTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedCustParams;
 
     playerOpts.advertising = {
