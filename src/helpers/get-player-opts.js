@@ -30,18 +30,27 @@ function getPlayerOpts(opts) {
   }
 
   if (hasAdvertising) {
-    const permutiveSegments = (window.permutive && Array.isArray(window.permutive.segments))
-      ? window.permutive.segments
-      : [];
+    let playerSegsPerm = '';
+    try {
+      if (typeof window !== 'undefined'){
+        const segs = JSON.parse(localStorage.getItem('_pdfps'));
+        if (Array.isArray(segs)) {
+          playerSegsPerm = segs.join(',');
+        }
+      }
+    } catch (e) {
+      console.warn('No se pudieron leer los segmentos de Permutive:', e);
+    }
+
+    const hasQuery = generatePrerollUrl.includes('?');
+    const encodedCustParams = `cust_params=permutive%3D${encodeURIComponent(playerSegsPerm)}`;
+    const finalTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedCustParams;
 
     playerOpts.advertising = {
       client: 'googima',
       admessage: 'Ad — xxs left',
       autoplayadsmuted: true,
-      // Se agregan como key-values para targeting
-      targeting: {
-        permutive: permutiveSegments.join(','),
-      },
+      tag: finalTagUrl,
     };
   }
 
