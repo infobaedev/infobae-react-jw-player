@@ -1,6 +1,6 @@
 {
   "name": "infobae-react-jw-player",
-  "version": "1.19.5",
+  "version": "1.19.6",
   "description": "A React component for launching JW Player instances on the client.",
   "main": "dist/react-jw-player.js",
   "scripts": {
