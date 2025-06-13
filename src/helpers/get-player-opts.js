@@ -44,8 +44,11 @@ function getPlayerOpts(opts) {
     }
 
     const hasQuery = generatePrerollUrl.includes('?');
-    const encodedCustParams = `permutive=${encodeURIComponent(playerSegsPerm)}`;
-    const finalTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedCustParams;
+    const encodedPermutive = `permutive=${encodeURIComponent(playerSegsPerm)}`;
+    const encodedCustParams = `cust_params=permutive%3D${encodeURIComponent(playerSegsPerm)}`;
+    const permutiveTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedPermutive;
+    const permutiveHasQuery = permutiveTagUrl.includes('?');
+    const finalTagUrl = permutiveTagUrl + (permutiveHasQuery ? '&' : '?') + encodedCustParams;
 
     playerOpts.advertising = {
       client: 'googima',
