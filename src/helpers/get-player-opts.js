@@ -44,8 +44,11 @@ function getPlayerOpts(opts) {
     }
 
     const hasQuery = generatePrerollUrl.includes('?');
-    const encodedCustParams = `permutive=${encodeURIComponent(playerSegsPerm)}`;
-    const finalTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedCustParams;
+    const encodedPermutive = `permutive=${encodeURIComponent(playerSegsPerm)}`;
+    const encodedCustParams = `cust_params=video-id%3D92347%26video-channel%3Dc-suite%26video-campaign%3D%26video-series%3D%26video-category%3Dit-management%2Cinternet-of-things%2Ccio-role%26video-tag%3D%26devsite%3Dfalse%26permutive%3D${encodeURIComponent(playerSegsPerm)}`;
+    const permutiveTagUrl = generatePrerollUrl + (hasQuery ? '&' : '?') + encodedPermutive;
+    const permutiveHasQuery = permutiveTagUrl.includes('?');
+    const finalTagUrl = permutiveTagUrl + (permutiveHasQuery ? '&' : '?') + encodedCustParams;
 
     playerOpts.advertising = {
       client: 'googima',
