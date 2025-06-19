@@ -64,6 +64,8 @@ function getPlayerOpts(opts) {
     const hasQuery = generatePrerollUrl.includes('?');
     const finalTagUrl = `${generatePrerollUrl + (hasQuery ? '&' : '?')}cust_params=${encodeURIComponent(custParamsStr)}`;
 
+    console.log('finalTagUrl', finalTagUrl);
+
     playerOpts.advertising = {
       client: 'googima',
       admessage: 'Ad - xxs left',
