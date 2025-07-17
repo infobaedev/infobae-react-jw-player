@@ -44,14 +44,15 @@ function getPlayerOpts(opts) {
     }
 
     const custParams = {
-      'video-id': '92347',
-      'video-channel': 'c-suite',
       'video-campaign': '',
-      'video-series': '',
       'video-category': 'it-management,internet-of-things,cio-role',
+      'video-channel': 'c-suite',
+      'video-id': '92347',
+      'video-series': '',
       'video-tag': '',
       devsite: 'false',
       permutive: playerSegsPerm,
+      tags: '__item-tags__',
     };
 
     let custParamsStr = '';
@@ -63,8 +64,6 @@ function getPlayerOpts(opts) {
 
     const hasQuery = generatePrerollUrl.includes('?');
     const finalTagUrl = `${generatePrerollUrl + (hasQuery ? '&' : '?')}cust_params=${encodeURIComponent(custParamsStr)}`;
-
-    console.log('finalTagUrl', finalTagUrl);
 
     playerOpts.advertising = {
       client: 'googima',
