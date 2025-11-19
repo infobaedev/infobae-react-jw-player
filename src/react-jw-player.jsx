@@ -74,6 +74,7 @@ class ReactJWPlayer extends Component {
     removeJWPlayerInstance(this.videoRef, window);
   }
   _initialize() {
+    console.log('JWPlayer global:', window.jwplayer);
     const { playerId, useMultiplePlayerScripts } = this.props;
 
     if (useMultiplePlayerScripts) {
@@ -84,9 +85,9 @@ class ReactJWPlayer extends Component {
     const player = window.jwplayer(this.videoRef);
     if (!player) {
       // this player ref may have been destroyed already
-      return; 
+      return;
     }
-    
+
     const playerOpts = getPlayerOpts(this.props);
 
     initialize({ component, player, playerOpts });
